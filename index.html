@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechPulse - The best news aggregator for Laravel, JavaScript, and AI tools.">
+    <title>TechPulse News | Laravel, JS & AI Aggregator</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>TechPulse</h1>
+        </div>
+        
+        <nav class="filters">
+            <button class="filter-btn active" data-category="all">All News</button>
+            <button class="filter-btn" data-category="laravel">Laravel</button>
+            <button class="filter-btn" data-category="javascript">JavaScript</button>
+            <button class="filter-btn" data-category="ai">Artificial Intelligence</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Top Ad Placeholder -->
+        <div class="ad-placeholder">
+            Banner Advertisement Area
+        </div>
+
+        <div id="news-grid" class="news-grid">
+            <!-- Dynamic cards will be injected here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TechPulse News. Focused on #Laravel, #JS, and #AI.</p>
+        <p>Premium News Aggregator built with Vanilla JS.</p>
+    </footer>
+
+    <!-- App Logic -->
+    <script type="module" src="/src/app.js"></script>
+</body>
+</html>
+
