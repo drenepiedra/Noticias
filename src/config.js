@@ -1,8 +1,12 @@
-// config.js
-// Replace 'YOUR_NEWS_API_KEY' with your actual NewsAPI.org or GNews.io API key
 export const CONFIG = {
-    API_KEY: 'YOUR_NEWS_API_KEY', // Recommended: Use a secure way to store this in production
-    API_BASE_URL: 'https://newsapi.org/v2/everything', // Defaulting to NewsAPI.org
-    KEYWORDS: ['Laravel', 'JavaScript', 'AI'],
-    ARTICLES_LIMIT: 20
+  API_KEY: "fa2d6fc2ca5f1b892bcbf9f3205576c8",
+  API_BASE_URL: "https://gnews.io/api/v4/search",
+  ARTICLES_LIMIT: 20,
+  KEYWORDS: [
+    'laravel',
+    'javascript',
+    'artificial intelligence',
+    'AI tools'
+  ]
 };
+console.log("Esta config biene del api", CONFIG);

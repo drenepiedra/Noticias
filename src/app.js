@@ -27,7 +27,7 @@ class NewsAggregator {
 
     updateFilter(category, activeBtn) {
         this.currentFilter = category;
-        
+
         // Update UI
         this.filterButtons.forEach(btn => btn.classList.remove('active'));
         activeBtn.classList.add('active');
@@ -48,16 +48,17 @@ class NewsAggregator {
         try {
             // NewsAPI search query
             const query = CONFIG.KEYWORDS.join(' OR ');
-            const url = `${CONFIG.API_BASE_URL}?q=${encodeURIComponent(query)}&pageSize=${CONFIG.ARTICLES_LIMIT}&sortBy=publishedAt&apiKey=${CONFIG.API_KEY}`;
-            
+
+            const url = `${CONFIG.API_BASE_URL}?q=${encodeURIComponent(query)}&max=${CONFIG.ARTICLES_LIMIT}&lang=en&apikey=${CONFIG.API_KEY}`;
+
             const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch news. Please check your API key.');
-            }
 
             const data = await response.json();
-            
+
+            if (!data.articles) {
+                throw new Error("Invalid API response");
+            }
+
             if (data.status === 'error') {
                 throw new Error(data.message || 'API Error');
             }
@@ -101,8 +102,8 @@ class NewsAggregator {
     }
 
     renderArticles() {
-        const filtered = this.currentFilter === 'all' 
-            ? this.articles 
+        const filtered = this.currentFilter === 'all'
+            ? this.articles
             : this.articles.filter(article => {
                 const cat = this.getCategoryFromContent(article);
                 return cat === this.currentFilter;
@@ -119,7 +120,7 @@ class NewsAggregator {
         }
 
         this.newsGrid.innerHTML = '';
-        
+
         filtered.forEach((article, index) => {
             // Add ad every 5 items
             if (index > 0 && index % 5 === 0) {
@@ -135,7 +136,7 @@ class NewsAggregator {
             const card = document.createElement('article');
             card.className = `news-card ${isDark ? 'dark-card' : ''}`;
             card.innerHTML = `
-                <img src="${article.urlToImage || 'https://via.placeholder.com/400x220?text=News+Thumbnail'}" 
+                <img src="${article.image || 'https://via.placeholder.com/400x220?text=News+Thumbnail'}" 
                      alt="${article.title}" 
                      class="card-image"
                      onerror="this.src='https://via.placeholder.com/400x220?text=No+Image'">
@@ -145,7 +146,7 @@ class NewsAggregator {
                     <p class="card-description">${article.description || 'Click to read the full story on the original website.'}</p>
                     <div class="card-footer">
                         <div class="author-info">
-                            <span>${article.author || 'TechPulse Staff'}</span>
+                            <span>${article.author || 'MyCatNotice Staff'}</span>
                         </div>
                         <span class="read-more">Read Story &rarr;</span>
                     </div>
